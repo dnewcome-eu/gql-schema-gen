@@ -1,5 +1,8 @@
 import { graphql } from "@tsmirror/graphql/lib/grahpql";
 import { GraphQLDate } from "graphql-iso-date";
+import express from 'express';
+
+const app = express();
 
 interface Root {}
 interface Context {}
@@ -43,3 +46,8 @@ const resolvers = {
 
 const { schema } = graphql(resolvers);
 console.log(schema);
+
+app.get('/', (req, res) => {
+  res.send(`<pre>${schema}</pre>`);
+});
+app.listen(8000);

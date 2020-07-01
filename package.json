@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node -r ./tsnoderegister.js test.ts",
     "test": "node -r ./tsnoderegister.js test.ts"
   },
   "author": "",
@@ -13,6 +14,7 @@
     "@tsmirror/reflect": "0.0.3",
     "@types/graphql-iso-date": "^3.4.0",
     "apollo-server": "^2.15.1",
+    "express": "^4.17.1",
     "graphql-iso-date": "^3.6.1",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^8.10.2"
