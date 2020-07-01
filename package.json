@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node -r ./tsnoderegister.js test.ts",
-    "test2": "node -r ./tsnoderegister.js test-bwm.ts"
+    "test": "node -r ./tsnoderegister.js test.ts"
   },
   "author": "",
   "license": "ISC",
