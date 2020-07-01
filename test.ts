@@ -1,57 +1,45 @@
-import 'reflect-metadata'
-import transformer from '@tsmirror/reflect/lib/transformer'
-require("ts-node").register({
-  transformers: (program: any) => {
-    return {
-      before: [transformer(program)]
-    };
-  }
-});
-import { graphql } from '@tsmirror/graphql/lib/grahpql'
-import { gql, ApolloServer } from 'apollo-server';
+import { graphql } from "@tsmirror/graphql/lib/grahpql";
+import { GraphQLDate } from "graphql-iso-date";
 
+interface Root {}
+interface Context {}
 
-interface Jedi {
-  name: string | null,
-  fullyTrained: boolean
+interface Loan {
+  loan_id: string;
 }
-
-const jediStore: Array<Jedi> = []
+interface LoanArgs {
+  loan_id: number;
+}
+interface LoansArgs {
+  customer_id: number;
+}
+interface ChangeDebitArgs {
+  debit_id: number;
+  loan_id: number;
+  debit_amount: number;
+  new_debit_amount: number;
+  debit_date: number;
+  new_debit_date: number;
+  hold_days: number;
+  payment_date: typeof GraphQLDate;
+}
 
 const resolvers = {
-    Query: {
-        jedis: (limit = 50): Jedi[] => jediStore.slice(0, limit),
-        jediByName: (name: string): Jedi | undefined => jediStore.find((j: Jedi) => j.name === name)
+  Date: GraphQLDate,
+  Query: {
+    getLoan: (root: Root, args: LoanArgs, context: Context): Loan => {
+      return {} as Loan;
     },
-    Mutation: {
-        doStuff: (i: number): boolean => jediStore.length > i,
-        createJedi: (j: Jedi): Jedi => { jediStore.push(j); return j }
-    }
-}
+  },
+  getLoans: (root: Root, args: LoansArgs, context: Context): Loan[] => {
+    return [] as Loan[];
+  },
+  Mutation: {
+    changeDebit: (root: Root, args: ChangeDebitArgs): string => {
+      return "";
+    },
+  },
+};
 
-const { schema } = graphql(resolvers)
-// const typeDefs = gql(schema);
-// new ApolloServer({ resolvers, typeDefs });
+const { schema } = graphql(resolvers);
 console.log(schema);
-
-/*
-input JediInput{
-  master: JediInput
-  name: String
-  fullyTrained: Boolean
-}
-type Jedi{
-  master: Jedi
-  name: String
-  fullyTrained: Boolean
-}
-type Mutation{
-  createJedi(j: JediInput): Jedi
-}
-type Query{
-  jedis(limit: Float = 50): [Jedi!]
-}
-schema{
-  query: Query
-  mutation: Mutation
-}*/
