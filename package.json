@@ -1,0 +1,18 @@
+{
+  "name": "graphql-generation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node -r ./tsnoderegister.js test.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tsmirror/graphql": "0.0.2",
+    "@tsmirror/reflect": "0.0.3",
+    "apollo-server": "^2.15.1",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.10.2"
+  }
+}
